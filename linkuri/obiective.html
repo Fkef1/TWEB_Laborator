@@ -18,7 +18,44 @@
         <a href="obiective.html" class="active">Obiective</a>
         <a href="contact.html">Contact</a>
     </nav>
+    <button id="openSidebarBtn">☰ </button>
 
+    <div id="sidebar">
+        <button id="closeSidebarBtn">✖</button>
+        <h3>Setări</h3>
+    
+        <label class="dark-mode-label">
+            🌙 Dark Mode
+            <label class="switch">
+                <input type="checkbox" id="darkModeCheckbox">
+                <span class="slider"></span>
+            </label>
+        </label>
+    
+        <label for="colorTheme">
+            🎨 Culoare Principală:
+            <select id="colorTheme">
+                <option value="green">Verde</option>
+                <option value="blue">Albastru</option>
+                <option value="red">Roșu</option>
+                <option value="purple">Mov</option>
+            </select>
+        </label>
+    
+        <label for="textSize">
+            🔠 Mărimea Textului:
+            <select id="textSize">
+                <option value="small">Mic</option>
+                <option value="normal" selected>Normal</option>
+                <option value="large">Mare</option>
+            </select>
+        </label>
+    
+        <label for="compactMode">
+            📏 Mod Compact
+            <input type="checkbox" id="compactMode">
+        </label>
+    </div>
     <main>
         <section>
             <h2>Stabilirea Obiectivelor</h2>
@@ -40,6 +77,9 @@
     <footer>
         <p>&copy; 2025</p>
     </footer>
+    <button id="scrollTopBtn" onclick="scrollToTop()">⬆ Sus</button>
+
+    <script src="../javascript/obiective.js"></script>
 
 </body>
 </html>

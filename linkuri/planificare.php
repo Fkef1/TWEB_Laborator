@@ -13,10 +13,10 @@
     </header>
     
     <nav>
-        <a href="../index.html">Acasă</a>
-        <a href="planificare.html" class="active">Planificare</a>
-        <a href="obiective.html">Obiective</a>
-        <a href="contact.html">Contact</a>
+    <a href="http://localhost/site/index.php">Acasă</a>
+    <a href="http://localhost/site/Obiective.php">Obiective</a>
+    <a href="http://localhost/site/planificare.php">Planificare</a>
+    <a href="http://localhost/site/contact.php">Contact</a>
     </nav>
     <button id="openSidebarBtn">☰ </button>
 

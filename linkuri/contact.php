@@ -1,3 +1,37 @@
+<?php
+$servername = "localhost"; 
+$username = "root"; 
+$password = "1234"; 
+$dbname = "contact"; 
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Conexiunea a eșuat: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nume = $conn->real_escape_string($_POST['nume'] ?? '');
+    $email = $conn->real_escape_string($_POST['email'] ?? '');
+    $mesaj = $conn->real_escape_string($_POST['mesaj'] ?? '');
+
+   $stmt = $conn->prepare("INSERT INTO users (nume, email, mesaj, data) VALUES (?, ?, ?, NOW())");
+
+if ($stmt) {
+    $stmt->bind_param("sss", $nume, $email, $mesaj);
+    if ($stmt->execute()) {
+        $mesajConfirmare = "Mesajul a fost salvat!";
+    } else {
+        die("Eroare la salvare: " . $stmt->error);
+    }
+    $stmt->close();
+} else {
+    die("Eroare la pregătirea interogării: " . $conn->error);
+}
+}
+
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="ro">
 <head>
@@ -13,51 +47,13 @@
     </header>
 
     <nav>
-        <a href="../index.html">Acasă</a>
-        <a href="planificare.html">Planificare</a>
-        <a href="obiective.html">Obiective</a>
-        <a href="contact.html" class="active">Contact</a>
+    <a href="http://localhost/site/index.php">Acasă</a>
+    <a href="http://localhost/site/obiective.php">Obiective</a>
+    <a href="http://localhost/site/planificare.php">Planificare</a>
+    <a href="http://localhost/site/contact.php">Contact</a>
+    <a href="http://localhost/site/mesaje.php">Mesaje</a>
     </nav>
-    <button id="openSidebarBtn">☰ </button>
-
-    <div id="sidebar">
-        <button id="closeSidebarBtn">✖</button>
-        <h3>Setări</h3>
     
-       
-        <label class="dark-mode-label">
-            🌙 Dark Mode
-            <label class="switch">
-                <input type="checkbox" id="darkModeCheckbox">
-                <span class="slider"></span>
-            </label>
-        </label>
-    
-        <label for="colorTheme">
-            🎨 Culoare Principală:
-            <select id="colorTheme">
-                <option value="green">Verde</option>
-                <option value="blue">Albastru</option>
-                <option value="red">Roșu</option>
-                <option value="purple">Mov</option>
-            </select>
-        </label>
-    
-        <label for="textSize">
-            🔠 Mărimea Textului:
-            <select id="textSize">
-                <option value="small">Mic</option>
-                <option value="normal" selected>Normal</option>
-                <option value="large">Mare</option>
-            </select>
-        </label>
-    
-        <label for="compactMode">
-            📏 Mod Compact
-            <input type="checkbox" id="compactMode">
-        </label>
-    </div>
-
     <main>
         <section>
             <h2>Date de Contact</h2>
@@ -71,7 +67,11 @@
 
         <section>
             <h2>Formular de Contact</h2>
-            <form id="contactForm" action="#" method="post">
+            <?php if (isset($mesajConfirmare)): ?>
+                <p style="color: green;"><?php echo $mesajConfirmare; ?></p>
+            <?php endif; ?>
+
+            <form id="contactForm" action="contact.php" method="post">
                 <div>
                     <label for="nume">Nume:</label>
                     <input type="text" id="nume" name="nume" required>
@@ -98,8 +98,6 @@
     <footer>
         <p>&copy; 2025</p>
     </footer>
-
-    <script src="../javascript/contact.js"></script>
 
 </body>
 </html>

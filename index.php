@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Obiective</title>
-    <link rel="stylesheet" href="../css/obiective.css">
+    <title>Treburi și Activități</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
     <header>
-        <h1>Obiective Personale și Profesionale</h1>
+        <h1>Treburile Omului - Organizare și Productivitate</h1>
     </header>
-
+    
     <nav>
-        <a href="../index.html">Acasă</a>
-        <a href="planificare.html">Planificare</a>
-        <a href="obiective.html" class="active">Obiective</a>
-        <a href="contact.html">Contact</a>
+    <a href="http://localhost/site/index.php">Acasă</a>
+    <a href="http://localhost/site/obiective.php">Obiective</a>
+    <a href="http://localhost/site/planificare.php">Planificare</a>
+    <a href="http://localhost/site/contact.php">Contact</a>
     </nav>
     <button id="openSidebarBtn">☰ </button>
 
@@ -31,6 +31,8 @@
                 <span class="slider"></span>
             </label>
         </label>
+        
+        
     
         <label for="colorTheme">
             🎨 Culoare Principală:
@@ -56,30 +58,26 @@
             <input type="checkbox" id="compactMode">
         </label>
     </div>
+    
+    
+    
+
     <main>
         <section>
-            <h2>Stabilirea Obiectivelor</h2>
-            <p>Stabilirea obiectivelor este esențială pentru a-ți direcționa eforturile și a-ți măsura progresul.</p>
-            <img src="../imagini/obiective.jpg" alt="Obiective" class="main-image">
-            <p>Aici vei găsi sfaturi despre cum să-ți stabilești obiective SMART și cum să le urmărești eficient.</p>
-        </section>
-
-        <section>
-            <h3>Exemple de Obiective</h3>
-            <ul>
-                <li>📚 Învață o nouă abilitate în 3 luni.</li>
-                <li>📖 Citește 10 cărți pe an.</li>
-                <li>🏆 Finalizează un proiect important la locul de muncă.</li>
-            </ul>
+            <h2>Gestionează-ți timpul eficient</h2>
+            <img src="imagini/basic.jpg" alt="Organizare zilnică" width="400">
+            <p>Fiecare zi aduce provocări și sarcini diverse. Un plan bine stabilit te ajută să îți optimizezi timpul și să fii mai productiv.</p>
+            <p>Explorează metode eficiente de organizare, stabilirea obiectivelor și gestionarea timpului pentru a avea o viață mai echilibrată.</p>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2025</p>
     </footer>
+
     <button id="scrollTopBtn" onclick="scrollToTop()">⬆ Sus</button>
 
-    <script src="../javascript/obiective.js"></script>
+    <script src="../javascript/index.js"></script>
 
 </body>
 </html>

@@ -12,7 +12,7 @@ function fadeInContent() {
 }
 window.onload = fadeInContent;
 
-window.onscroll = function() {
+window.onscroll = function () {
     let btn = document.getElementById("scrollTopBtn");
     if (document.documentElement.scrollTop > 200) {
         btn.style.display = "block";
@@ -64,22 +64,48 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    textSizeSelect.addEventListener("change", function() {
+    textSizeSelect.addEventListener("change", function () {
         let size = this.value;
         let fontSize = size === "small" ? "14px" : size === "large" ? "20px" : "16px";
         document.documentElement.style.setProperty("--font-size", fontSize);
         localStorage.setItem("textSize", size);
     });
 
-    colorThemeSelect.addEventListener("change", function() {
+    colorThemeSelect.addEventListener("change", function () {
         let color = this.value;
         document.documentElement.style.setProperty("--main-color", color);
         localStorage.setItem("colorTheme", color);
     });
 
-    compactModeToggle.addEventListener("change", function() {
+    compactModeToggle.addEventListener("change", function () {
         document.body.classList.toggle("compact-mode");
         localStorage.setItem("compactMode", document.body.classList.contains("compact-mode"));
+    });
+});
+
+$(document).ready(function () {
+    $(".deleteBtn").on("click", function () {
+        const messageId = $(this).data("id");
+
+        if (confirm("Ești sigur că vrei să ștergi acest mesaj?")) {
+            $.ajax({
+                type: "POST",
+                url: "delete_mesage.php",
+                data: { id: messageId },
+                success: function (response) {
+                    if (response.trim() === "success") {
+                        $(`button[data-id="${messageId}"]`).closest("tr").remove();
+                    } else {
+                        alert("A apărut o eroare la ștergerea mesajului.");
+                        console.log("Răspuns server:", response);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert("Eroare AJAX: " + error);
+                    console.log("xhr:", xhr);
+                }
+            });
+        }
     });
 });
 
@@ -93,10 +119,32 @@ document.querySelectorAll("nav a").forEach(link => {
     });
 });
 
-document.getElementById("openSidebarBtn").addEventListener("click", function() {
+document.getElementById("openSidebarBtn").addEventListener("click", function () {
     document.getElementById("sidebar").classList.add("show-sidebar");
 });
 
-document.getElementById("closeSidebarBtn").addEventListener("click", function() {
+document.getElementById("closeSidebarBtn").addEventListener("click", function () {
     document.getElementById("sidebar").classList.remove("show-sidebar");
 });
+
+function filterMessages() {
+    const filter = document.getElementById("searchInput").value.toLowerCase();
+    const rows = document.querySelectorAll("table tbody tr");
+
+    rows.forEach(row => {
+        const columns = row.querySelectorAll("td");
+        let found = false;
+
+        columns.forEach(column => {
+            if (column.textContent.toLowerCase().includes(filter)) {
+                found = true;
+            }
+        });
+
+        if (found) {
+            row.style.display = "";
+        } else {
+            row.style.display = "none";
+        }
+    });
+}

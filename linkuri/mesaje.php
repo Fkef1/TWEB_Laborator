@@ -22,6 +22,8 @@ $result = $conn->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesaje Contact</title>
     <link rel="stylesheet" href="../css/mesaje.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="mesaje.js" defer></script>
 </head>
 <body>
 
@@ -38,6 +40,7 @@ $result = $conn->query($sql);
 
     <main>
         <section>
+        <input type="text" id="searchInput" placeholder="Căutare..." onkeyup="filterMessages()">
             <h2>Lista mesajelor</h2>
             <?php if ($result->num_rows > 0): ?>
                 <table border="1">
@@ -55,6 +58,7 @@ $result = $conn->query($sql);
                             <td><?php echo $row['email']; ?></td>
                             <td><?php echo $row['mesaj']; ?></td>
                             <td><?php echo $row['data']; ?></td>
+                            <td><button class="deleteBtn" data-id="<?php echo $row['id']; ?>">Șterge</button></td>
                         </tr>
                     <?php endwhile; ?>
                 </table>
@@ -67,7 +71,6 @@ $result = $conn->query($sql);
     <footer>
         <p>&copy; 2025</p>
     </footer>
-
 </body>
 </html>
 

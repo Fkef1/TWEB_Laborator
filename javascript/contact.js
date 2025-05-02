@@ -100,3 +100,26 @@ document.getElementById("openSidebarBtn").addEventListener("click", function() {
 document.getElementById("closeSidebarBtn").addEventListener("click", function() {
     document.getElementById("sidebar").classList.remove("show-sidebar");
 });
+document.getElementById("contactForm").addEventListener("submit", function(event) {
+    event.preventDefault(); 
+
+    let formData = new FormData(this);
+
+    fetch("process_contact.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        let messageBox = document.createElement("p");
+        messageBox.textContent = data.message;
+        messageBox.style.color = data.status === "success" ? "green" : "red";
+
+        document.getElementById("contactForm").appendChild(messageBox);
+
+        if (data.status === "success") {
+            document.getElementById("contactForm").reset(); // Golește formularul
+        }
+    })
+    .catch(error => console.error("Eroare:", error));
+});
